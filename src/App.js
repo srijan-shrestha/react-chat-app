@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import './App.css';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/analytics';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -22,12 +23,15 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
+const analytics = firebase.analytics();
 const [user] = useAuthState(auth);
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header>
+        <h1>Chat App <span>💬</span></h1>
+        <SignOut />
       </header>
 
       <section>
@@ -44,11 +48,14 @@ function SignIn() {
     auth.signInWithPopup(provider);
   }
   return(
-    <button
-    onClick={signInWithGoogle}
-    >
-      Sigin in with Google
-    </button>
+    <>
+      <button
+      className="sign-in"
+      onClick={signInWithGoogle}
+      >
+        Sigin in with Google
+      </button>
+    </>
   )
 }
 
@@ -56,6 +63,7 @@ function SignOut() {
   return auth.currentUser && (
 
     <button
+     className="sign-out"
      onClick={() => auth.SignOut()}
     >
       Sign Out
@@ -64,6 +72,7 @@ function SignOut() {
 }
 
 function ChatRoom() {
+  const dummy = useRef();
   const messagesRef = firestore.collection('messages');
   const query = messagesRef.orderBy('createdAt').limit(25);
 
@@ -82,14 +91,15 @@ function ChatRoom() {
     });
 
     setFormValue('');
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
   }
 
   return (
     <>
-      <div>
+      <main>
         {messages && messages.map(msg => 
         <ChatMessage key={msg.id} message={msg} />)}
-      </div>
+      </main>
       <form onSubmit={sendMessage}>
         <input value={formValue} 
         onChange={(e) => setFormValue(e.target.value)}
