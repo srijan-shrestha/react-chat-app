@@ -116,7 +116,9 @@ const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
 
 return (
   <div className={`message ${messageClass}`}>
-    <img src={photoURL} />
+    <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'}
+    alt="profilePic"
+    />
     <p>{text}</p>
   </div>
 )
