@@ -24,13 +24,14 @@ firebase.initializeApp({
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 const analytics = firebase.analytics();
-const [user] = useAuthState(auth);
 
 function App() {
+const [user] = useAuthState(auth);
+
   return (
     <div className="App">
       <header>
-        <h1>Chat App <span>💬</span></h1>
+        <h1>Srijan Chat App <span>💬</span></h1>
         <SignOut />
       </header>
 
