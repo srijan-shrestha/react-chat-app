@@ -23,7 +23,6 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-const analytics = firebase.analytics();
 
 function App() {
 const [user] = useAuthState(auth);
@@ -31,7 +30,7 @@ const [user] = useAuthState(auth);
   return (
     <div className="App">
       <header>
-        <h1>Srijan Chat App <span>💬</span></h1>
+        <h1>Srijan Chat App <span role="img" aria-label="emoji">💬</span></h1>
         <SignOut />
       </header>
 
