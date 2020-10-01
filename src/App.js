@@ -64,7 +64,7 @@ function SignOut() {
 
     <button
      className="sign-out"
-     onClick={() => auth.SignOut()}
+     onClick={() => auth.signOut()}
     >
       Sign Out
     </button>
