@@ -9,7 +9,7 @@ import 'firebase/analytics';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-
+// Fill out the firebase configuration to enable chat application
 firebase.initializeApp({
   apiKey: "",
   authDomain: "",
